@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="demoapp">
+<head>
+	<meta charset="utf-8">
+	<title>Welcome to Angularjs</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous" />
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg==" crossorigin="anonymous"></script>-->
+	<!--<script src="angular.min.js" ></script>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular-route.min.js"></script>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+<div class="container" >
+<div data-ng-view=""></div>
+</div>
+<script>;
+var demoapp = angular.module('demoapp',['ngRoute']);
+demoapp.config(function($routeProvider) {
+	$routeProvider
+		.when('/view1', {
+			templateUrl: 'partials/view1.html',
+			controller: 'SimpleController'
+		})
+		.when('/view2', {
+			templateUrl: 'partials/view2.html',
+			controller: 'SimpleController'
+		})
+		.otherwise({
+			redirectTo: '/view1'
+		});
+});
+
+demoapp.factory('SimpleFactory',SimpleFactory);
+function SimpleFactory(){
+var factory = {};
+var customers=[
+{name:'John Wick',age:'40',city:'New York'},
+{name:'John Doe',age:'30',city:'Hong Kong'},
+{name:'Jo Biden',age:'20',city:'Sanfranscisco'},
+{name:'Walsh',age:'33',city:'Miami Beach'},
+{name:'Warne',age:'15',city:'Sydney'},
+{name:'Maya',age:'50',city:'Kochi'},
+{name:'caty',age:'22',city:'Porto'}
+];
+factory.getCustomers = function(){
+ return customers;
+}
+return factory;
+}
+
+demoapp.controller('SimpleController',SimpleController);
+function SimpleController($scope,SimpleFactory){
+$scope.customers = SimpleFactory.getCustomers();
+$scope.addCustomer =function(){
+$scope.customers.push({name:$scope.newCustomer.name,age:$scope.newCustomer.age,city:$scope.newCustomer.city});
+}
+}
+
+
+</script>
+
+</body>
+</html>

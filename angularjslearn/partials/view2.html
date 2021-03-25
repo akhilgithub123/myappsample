@@ -1,0 +1,11 @@
+
+<div class="container">
+<h2>View 2</h2>
+City:
+<input type="text" ng-model="txtcity"/>{{ txtcity }}
+
+<ul>
+<li ng-repeat="cust in customers | filter: txtcity | orderBy:cust.city">{{ cust.city }}</li>
+</ul>
+
+</div>
